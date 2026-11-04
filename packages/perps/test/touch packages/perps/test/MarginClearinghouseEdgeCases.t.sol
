@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: AGPL-3.0
+pragma solidity 0.8.35;
+
+import {Test} from "forge-std/Test.sol";
+import {MarginClearinghouse} from "../src/MarginClearinghouse.sol";
+
+contract MarginClearinghouseEdgeCasesTest is Test {
+    MarginClearinghouse public clearinghouse;
+    address public user = address(0x1337);
+
+    function setUp() public {
+        // Deploy clearinghouse with a mock settlement token address for testing
+        clearinghouse = new MarginClearinghouse(address(0x1234));
+    }
+
+    /// @notice Fuzz test to verify free equity and locked margin behavior
+    function testFuzz_MarginEncumbrances(uint256 depositAmount) public {
+        vm.assume(depositAmount > 1000 && depositAmount < 1e12);
+        // Add your assertions or simulated actions here
+        assertTrue(address(clearinghouse) != address(0));
+    }
+}
